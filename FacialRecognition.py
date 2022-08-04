@@ -1,17 +1,12 @@
 #Name: Samar Aswani
 #Task: Facial Recognition using OpenCV
-#Time Spent: 4-5 hours
-#Resource used: https://www.superdatascience.com/opencv-face-recognition/
 
-#OpenCV module
+
 import sys
 import cv2
-#os module for reading training data directories and paths
 import os
-#numpy to convert python lists to numpy arrays as it is needed by OpenCV face recognizers
 import numpy as np
 
-#the names here will need to be changed!!!
 subjects = ["", "Samar Aswani", "Rishi Barve", "Mahesh Aswani"]
 def detect_face(img):
 #convert the test image to gray scale as opencv face detector expects gray images
@@ -23,7 +18,6 @@ def detect_face(img):
  
 #This code detects multiscale images(some images may be closer to camera than others)
 #result is a list of faces
-	#faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5);
 	faces = face_cascade.detectMultiScale(gray, 1.3, 5)
  
 #if no faces are detected then return original img
@@ -42,7 +36,7 @@ data_folder_path = "C:/samaraswani/documents/FacialRecognitionProb/training-data
 
 def prepare_training_data(data_folder_path):
  
-#------STEP-1--------
+
 #get the directories (one directory for each subject) in data folder
 	dirs = os.listdir(data_folder_path)
 	print(dirs)
@@ -60,10 +54,6 @@ def prepare_training_data(data_folder_path):
 		if not dir_name.startswith("s"):
 			continue;
  
-#------STEP-2--------
-#extract label number of subject from dir_name
-#format of dir name = slabel
-#, so removing letter 's' from dir_name will give us label
 		label = int(dir_name.replace("s", ""))
  
 #build path of directory containing images for current subjects
@@ -73,7 +63,6 @@ def prepare_training_data(data_folder_path):
 #get the images names that are inside the given subject directory
 		subject_images_names = os.listdir(subject_dir_path)
  	
-#------STEP-3--------
 #go through each image name, read image, 
 #detect face and add face to list of faces
 		for image_name in subject_images_names:
@@ -96,7 +85,6 @@ def prepare_training_data(data_folder_path):
 #detect face
 			face, rect = detect_face(image)
  
-#------STEP-4--------
 #ignores faces that are not detected
 			if face is not None:
 #add face to list of faces
@@ -158,10 +146,7 @@ def predict(test_img):
 
 print("Predicting images...")
  
-#The number of test images can be changed by adding another variable of test_img.
-#another predicted_img variable will also need to be created for this.
-#and another cv2.imshow() line will also have to be written.
-#the subject name will have to be entered in the array at the top as well.
+
 
 #load test images. 
 test_img1 = cv2.imread("test-data/test1.jpg")
